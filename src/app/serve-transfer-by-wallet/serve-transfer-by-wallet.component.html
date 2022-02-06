@@ -1,0 +1,31 @@
+<div class="container account" >
+    <div class="row searxh_zone">
+        <label for="reference">Reference de Transfert</label>
+        <input type="text" class="form-control" placeholder="Reference" name="reference" [(ngModel)]="reference" [ngClass] = " { 'is-invalid' : invalidReference() } " autocomplete="off" />
+        <button type="submit" class="btn btn-primary" (click)="chercher()" style="margin-right: 4px;" >Chercher</button>
+        <p class="errorS" [ngClass] = " { 'set' : invalidReference() } ">{{errorReference }}</p>
+    </div> 
+    <div class="row">
+        <app-transfer-infos *ngIf="multitransfer" [multitransfer]="multitransfer" ></app-transfer-infos>
+        <div *ngIf="blqstatus()" class="buttons_bottom">
+            <button (click)="setBenifice_infos()" data-toggle="modal" data-target="#infos_benifice" >Bénéficiaire</button>
+        </div>
+        <app-kyc-table *ngIf="recipient_infos" [user]="recipient_infos" ></app-kyc-table>
+        <div *ngIf="recipient_infos && phone_number!=''"  class="buttons_bottom">
+            <button data-toggle="modal" data-target="#pin_code" (click)="valide = true" >Valider</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="infos_benifice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 80%;">
+            <app-recipient-account-search (show_user_infos)="getBenifice_infos($event)" ></app-recipient-account-search>
+    </div>
+</div>
+
+<div *ngIf="valide && phone_number!=''" class="modal" id="pin_code" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 80%;">
+        <app-otp-check [phone_number]="recipient_infos?.phoneNumber" [reference]="reference" ></app-otp-check>
+    </div>
+</div>

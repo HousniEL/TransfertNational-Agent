@@ -1,0 +1,31 @@
+<div class="container account" >
+    <div class="row searxh_zone">
+        <label for="reference">Reference de Transfert</label>
+        <input type="text" class="form-control" placeholder="Reference" name="reference" [(ngModel)]="reference" [ngClass] = " { 'is-invalid' : invalidReference() } " autocomplete="off" />
+        <button type="submit" class="btn btn-primary" (click)="chercher()" style="margin-right: 4px;" >Chercher</button>
+        <p class="errorS" [ngClass] = " { 'set' : invalidReference() } ">{{errorReference }}</p>
+    </div> 
+    <div class="row">
+        <app-transfer-infos *ngIf="multitransfer" [multitransfer]="multitransfer" ></app-transfer-infos>
+        <div *ngIf="blqstatus()  && !recipient_infos" class="buttons_bottom">
+            <button (click)="setBenifice_infos()" data-toggle="modal" data-target="#infos_benifice" >Bénéficiaire</button>
+        </div>
+        <div *ngIf="recipient_infos"  class="buttons_bottom">
+            <button *ngIf="!pin_code_ex" (click)="serve_transfer()" >Valider</button>
+            <button *ngIf="pin_code_ex" data-toggle="modal" data-target="#pin_code" >Valider</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="infos_benifice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 80%;">
+            <app-recipient-search (show_user_infos)="getBenifice_infos($event)" (pin_code)="pin_code_exist($event)" [reference]="reference"></app-recipient-search>
+    </div>
+</div>
+
+<div class="modal" id="pin_code" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 80%;">
+        <app-pincode-check [reference]="reference" ></app-pincode-check>
+    </div>
+</div>

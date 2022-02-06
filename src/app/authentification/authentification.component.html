@@ -1,0 +1,71 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto" style="min-width: 350px">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <div
+              class="card-title text-center"
+              style="
+                margin: 1.5rem 0;
+                font-weight: 700;
+                color: #444;
+                font-size: 1.3rem;
+              "
+            >
+              S'Authentifier
+            </div>
+
+            <form
+              [formGroup]="agent"
+              style="display: flex; flex-direction: column; align-items: center"
+            >
+              <div
+                id="error-container"
+                *ngIf="invalidEmailUtili() || invalidPassword() || errors"
+              >
+                Email ou mot de passe incorrect.
+              </div>
+
+              <div class="form-ligne">
+                <div>
+                  <input
+                    type="text"
+                    formControlName="email"
+                    name="email"
+                    id="email"
+                    class="form-control input-text"
+                    placeholder="Email"
+                    autocomplete="off"
+                  />
+                </div>
+              </div>
+              <div class="form-ligne">
+                <div>
+                  <input
+                    type="password"
+                    formControlName="password"
+                    name="password"
+                    id="password"
+                    class="form-control input-text"
+                    placeholder="Mot de passe"
+                    aria-describedby="noticepwd"
+                  />
+                </div>
+              </div>
+              <div class="form-dern-ligne">
+                <button type="submit" class="auth" (click)="onSubmit()">
+                  S'Authentifier
+                </button>
+              </div>
+            </form>
+            <div id="logo-container">
+              <i class="fas fa-landmark logo-icon"></i>
+              <span class="logo-name">Bank</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
