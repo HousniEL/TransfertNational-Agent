@@ -31,14 +31,25 @@ export class ServeTransferByWalletComponent implements OnInit {
 
 
   chercher(){
+    var chercherBtn : any = document.getElementById("chercher-ref-wt");
+    chercherBtn.innerHTML = "<i class='fa fa-circle-o-notch fa-spin fa-fw'></i>";
+    chercherBtn.setAttribute('disabled', true);
     this.errorReference="";
-    if(!this.reference) this.errorReference="Champ vide !"
+    if(!this.reference){
+      this.errorReference="Champ vide !";
+      chercherBtn.innerHTML = "Chercher";
+      chercherBtn.removeAttribute("disabled");
+    }
     else{
       this.multitransfersSrv.GetWalletMultitransfer_byreference(this.reference).subscribe((data:any) => {
           this.multitransfer = data;
           this.status = this.multitransfer.transfers[0].transfer_status;
+          chercherBtn.innerHTML = "Chercher";
+          chercherBtn.removeAttribute("disabled");
       }, (error:any) => {
           this.errorReference=error.error.error;
+          chercherBtn.innerHTML = "Chercher";
+          chercherBtn.removeAttribute("disabled");
       });
     }
   }
