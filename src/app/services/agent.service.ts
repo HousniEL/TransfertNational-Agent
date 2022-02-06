@@ -1,14 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Agent } from 'src/Models/agent';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AgentService {
 
-  baseUrl :string= "https://ensa-agentapp.herokuapp.com/api_agent/";
+  baseUrl :string= "https://ensa-api-transfer.herokuapp.com/api_agent/";
   
   constructor(private _http:HttpClient) { }
   
