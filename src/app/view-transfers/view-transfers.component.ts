@@ -79,7 +79,9 @@ export class ViewTransfersComponent implements OnInit {
     }
     else{
       this.multitransfersService.GetMultitransfer_byreference(this.reference).subscribe((data:any) => {
-          window.location.href="/infos_Transfert/"+this.reference;
+        chercherBtn.innerHTML = "Chercher";
+        chercherBtn.removeAttribute("disabled");
+        window.location.href="/infos_Transfert/"+this.reference;
       }, (error:any) => {
         this.errorReference = error.error.error;
         chercherBtn.innerHTML = "Chercher";
