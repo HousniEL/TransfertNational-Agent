@@ -67,4 +67,8 @@ export class MultitransfersService {
     return this._http.put(this.baseUrl+"UniqueTransfer/extort/"+reference+"?motif="+motif,{});
   }
 
+  public checkIfClientBlocked(object: any) {
+    return this._http.post(this.baseUrl+"blacklist/client",object);
+  }
+
 }

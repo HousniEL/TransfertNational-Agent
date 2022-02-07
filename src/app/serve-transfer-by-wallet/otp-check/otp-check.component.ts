@@ -43,11 +43,15 @@ export class OtpCheckComponent implements OnInit {
     this.errorAction=""
     if (this.otpForm.dirty && this.otpForm.valid) {
       if(this.otp_code == this.otpForm.controls["otp"].value){
-        this.multitransferSrv.ServeWalletTransfer_byreference(this.reference).subscribe((data:any)=>{
-          window.location.href="infos_Transfert/"+this.reference;
-        },(error:any)=>{
-            this.errorAction = error.error.error;
-        })
+        this.multitransferSrv.checkIfClientBlocked(this.client).subscribe((val) => {
+            this.errorAction="black lister";
+        }, (err) => {
+          this.multitransferSrv.ServeWalletTransfer_byreference(this.reference).subscribe((data:any)=>{
+            window.location.href="infos_Transfert/"+this.reference;
+          },(error:any)=>{
+              this.errorAction = error.error.error;
+          })
+        });
       }else{
         this.errorAction = "Code incorrect !"
       }

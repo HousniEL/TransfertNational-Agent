@@ -144,12 +144,8 @@ button{
   padding: .4rem 0;
   padding-top: .5rem;
   width: 100px;
-  border-radius: .4rem;
-  background-color: rgb(23, 131, 150);
-}
-
-button:hover{
-  background-color: rgb(74, 182, 201);
+  border-radius: .3rem;
+  background-color: var(--first-color);
 }
 
 .error{
